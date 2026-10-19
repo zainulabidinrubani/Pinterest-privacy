@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy — pinterest-autopin</title>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, Arial, sans-serif;
+    max-width: 720px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+    color: #1a1a1a;
+    line-height: 1.6;
+  }
+  h1 { font-size: 1.8rem; margin-bottom: 0.5rem; }
+  .meta { color: #666; font-size: 0.9rem; margin-bottom: 2rem; }
+  h2 { font-size: 1.2rem; margin-top: 2rem; }
+  p, ul { margin: 0.5rem 0 1rem 0; }
+  ul { padding-left: 1.4rem; }
+  code { background: #f4f4f4; padding: 0.1rem 0.35rem; border-radius: 4px;
+         font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.9em; }
+  .footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid #eee;
+            color: #777; font-size: 0.85rem; }
+</style>
+</head>
+<body>
+<h1>Privacy Policy</h1>
+<div class="meta">
+  App: <code>pinterest-autopin</code><br>
+  Last updated: October 2026<br>
+  Contact: <code>your-email@example.com</code>
+</div>
+
+<h2>Overview</h2>
+<p>
+  <code>pinterest-autopin</code> is a personal-use automation tool that posts
+  AI-generated pin content to the developer's own Pinterest account on a
+  scheduled basis. It does NOT collect, store, or share any personal data
+  from Pinterest end users. It does NOT act as a service offered to other
+  Pinterest users — there are no sign-ups, logins, or user accounts.
+</p>
+
+<h2>What this app accesses</h2>
+<p>The app uses the Pinterest API v5 with the following scopes:</p>
+<ul>
+  <li><code>boards:read</code> — to list the developer's own boards (used only to look up the configured <code>board_id</code>).</li>
+  <li><code>boards:write</code> — to create pins on the developer's own boards.</li>
+  <li><code>pins:write</code> — to create pins (with title, description, image, and an affiliate link as the destination URL) on the developer's own account.</li>
+  <li><code>user_accounts:read</code> — to verify the OAuth token is active.</li>
+</ul>
+<p>
+  All access is scoped to the developer's own Pinterest account via an OAuth
+  token explicitly granted by that account. No other Pinterest user's data
+  is read, modified, or stored.
+</p>
+
+<h2>What data is stored</h2>
+<ul>
+  <li><b>Locally (developer-side only):</b> the queue of products to pin
+      (product name, affiliate link, source image URL) is stored in a CSV
+      file or a private Google Sheet owned by the developer.</li>
+  <li><b>Generated images:</b> AI-generated pin images are saved to a
+      local directory on the developer's machine / GitHub Actions runner,
+      then uploaded to Pinterest. They are not shared with any third party.</li>
+  <li><b>Pin metadata:</b> the pin ID returned by Pinterest is written
+      back into the local queue for tracking. No other Pinterest user data
+      is stored.</li>
+</ul>
+
+<h2>Third-party services this app calls</h2>
+<ul>
+  <li><b>Pinterest API v5</b> — to create pins on the developer's own account.</li>
+  <li><b>Google Gemini API</b> (Google AI Studio free tier) — to generate SEO
+      copy and stylized pin images from product photos. The product name,
+      affiliate link, and source image are sent to Google for processing.</li>
+  <li><b>Google Sheets API</b> (optional, only if queue backend is set to
+      <code>sheets</code>) — to read/write the developer's own private spreadsheet.</li>
+  <li><b>GitHub Actions</b> — to run the hourly schedule; GitHub sees only
+      the repository code and GitHub Secrets (no plaintext credentials).</li>
+</ul>
+
+<h2>AI-generated content disclosure</h2>
+<p>
+  Every pin created by this app is marked with an <code>[AI-generated]</code>
+  prefix in the <code>alt_text</code> field, in compliance with Pinterest's
+  Acceptable Use Policy. Image-generation prompts instruct the model to
+  preserve the original product's appearance — shape, colour, and brand
+  markings are not altered.
+</p>
+
+<h2>Affiliate links</h2>
+<p>
+  Pins created by this app link to affiliate URLs supplied by the developer.
+  Those URLs may set their own cookies and tracking pixels governed by the
+  destination site's own privacy policy. This app does not control or benefit
+  from third-party tracking beyond the affiliate commission disclosed by
+  the destination merchant.
+</p>
+
+<h2>Data retention</h2>
+<ul>
+  <li><b>Queue rows:</b> retained indefinitely by the developer for tracking
+      which products have been pinned. The developer may delete them at any
+      time by editing the local queue file or Google Sheet.</li>
+  <li><b>Generated images:</b> kept until the GitHub Actions cache is
+      evicted (~7 days) or until the developer deletes them locally.</li>
+  <li><b>Access tokens:</b> stored as GitHub Secrets; never logged, never
+      written to disk in plaintext.</li>
+</ul>
+
+<h2>Your rights</h2>
+<p>
+  This app does not collect personal data from you, so there is no personal
+  data to access, correct, or delete under GDPR/CCPA. If you believe a pin
+  posted by this app violates your rights (e.g. it uses your copyrighted
+  product image without permission), contact the developer at the email
+  above and the pin will be removed within 5 business days.
+</p>
+
+<h2>Changes to this policy</h2>
+<p>
+  Material changes will be reflected by updating the "Last updated" date at
+  the top of this page and committing the change to the public GitHub
+  repository hosting this document.
+</p>
+
+<div class="footer">
+  This privacy policy is published from the public GitHub repository at
+  <code>https://github.com/&lt;your-username&gt;/pinterest-autopin</code>.
+</div>
+
+</body>
+</html>
